@@ -37,8 +37,9 @@ public class ProjectConfiguration {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.addFilterAfter(new CustomCsrfFilter(), CsrfFilter.class)
-			.authorizeHttpRequests(c -> c.anyRequest().permitAll());
+		
+		http.formLogin(c -> c.defaultSuccessUrl("/main", true));
+		http.authorizeHttpRequests(c -> c.anyRequest().authenticated());
 		
 		return http.build();
 	}
