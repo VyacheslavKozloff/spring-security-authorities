@@ -20,8 +20,8 @@ public class ProjectConfiguration {
 		
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 		
-		UserDetails user1 = User.withUsername("bob").password("123").authorities("ROLE_MANAGER").build();
-		UserDetails user2 = User.withUsername("bill").password("123").authorities("ROLE_ADMIN").build();
+		UserDetails user1 = User.withUsername("bob").password("123").roles("MANAGER").build();
+		UserDetails user2 = User.withUsername("bill").password("123").roles("ADMIN").build();
 		
 		manager.createUser(user1);
 		manager.createUser(user2);
@@ -37,7 +37,8 @@ public class ProjectConfiguration {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.httpBasic(Customizer.withDefaults());
-		http.authorizeHttpRequests(c -> c.anyRequest().hasRole("ADMIN"));
+		http.authorizeHttpRequests(c -> c.requestMatchers("/hello").hasRole("ADMIN")
+				.requestMatchers("/ciao").hasRole("MANAGER"));
 		
 		return http.build();
 	}
