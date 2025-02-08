@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
 public class ProjectConfiguration {
@@ -36,9 +37,8 @@ public class ProjectConfiguration {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.httpBasic(Customizer.withDefaults());
-		http.authorizeHttpRequests(c -> c.requestMatchers("/hello").hasRole("ADMIN")
-				.requestMatchers("/ciao").hasRole("MANAGER"));
+		http.addFilterAfter(new CustomCsrfFilter(), CsrfFilter.class)
+			.authorizeHttpRequests(c -> c.anyRequest().permitAll());
 		
 		return http.build();
 	}
