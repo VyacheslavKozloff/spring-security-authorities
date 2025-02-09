@@ -11,15 +11,15 @@ public class Token {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String identifear;
+	private String identifier;
 	private String token;
 	
 	public Token() {}
 
-	public Token(int id, String identifear, String token) {
+	public Token(int id, String identifier, String token) {
 		super();
 		this.id = id;
-		this.identifear = identifear;
+		this.identifier = identifier;
 		this.token = token;
 	}
 
@@ -32,11 +32,11 @@ public class Token {
 	}
 
 	public String getIdentifear() {
-		return identifear;
+		return identifier;
 	}
 
-	public void setIdentifear(String identifear) {
-		this.identifear = identifear;
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
 
 	public String getToken() {
