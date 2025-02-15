@@ -15,16 +15,6 @@ public class HelloController {
 		return "hello";
 	}
 	
-	@PostMapping("/hello")
-	public String postHello() {
-		return "hello";
-	}
-	
-	@GetMapping("/ciao")
-	public String ciao() {
-		return "ciao";
-	}
-	
 	@GetMapping("/main") 
 	public String main() {
 		return "main.html";
